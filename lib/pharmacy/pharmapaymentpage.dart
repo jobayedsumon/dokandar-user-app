@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:aamarpay/aamarpay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
@@ -76,6 +77,8 @@ class PaymentPharmaPageState extends State<PaymentPharmaPage> {
   bool isCoupon = false;
 
   double coupAmount = 0.0;
+
+  bool isLoading = false;
 
   PaymentPharmaPageState(
       this.order_id, this.cart_id, this.totalAmount, this.paymentVia);
@@ -432,75 +435,106 @@ class PaymentPharmaPageState extends State<PaymentPharmaPage> {
                                   }
 //                    Navigator.popAndPushNamed(context, PageRoutes.orderPlaced),
                                   ),
-                              // (totalAmount > 0.0 &&
-                              //         paymentVia != null &&
-                              //         paymentVia.length > 0)
-                              //     ? Container(
-                              //         padding: EdgeInsets.symmetric(
-                              //             vertical: 8.0, horizontal: 16.0),
-                              //         color: kCardBackgroundColor,
-                              //         child: Text(
-                              //           'ONLINE PAYMENT',
-                              //           style: Theme.of(context)
-                              //               .textTheme
-                              //               .caption
-                              //               .copyWith(
-                              //                   color: kDisabledColor,
-                              //                   fontWeight: FontWeight.bold,
-                              //                   letterSpacing: 0.67),
-                              //         ),
-                              //       )
-                              //     : Container(),
-                              // Container(
-                              //   width: MediaQuery.of(context).size.width,
-                              //   child: (totalAmount > 0.0 &&
-                              //           paymentVia != null &&
-                              //           paymentVia.length > 0)
-                              //       ? ListView.builder(
-                              //           shrinkWrap: true,
-                              //           primary: false,
-                              //           itemBuilder: (context, index) {
-                              //             return BuildListTile(
-                              //               image:
-                              //                   'images/payment/credit_card.png',
-                              //               text:
-                              //                   '${paymentVia[index].payment_mode}',
-                              //               onTap: () {
-                              //                 setState(() {
-                              //                   setProgressText =
-                              //                       'Proceeding to placed order please wait!....';
-                              //                   showDialogBox = true;
-                              //                 });
-                              //                 if (paymentVia[index]
-                              //                         .payment_mode ==
-                              //                     "Razor Pay") {
-                              //                   openCheckout(
-                              //                       "${paymentVia[index].payment_key}",
-                              //                       totalAmount * 100);
-                              //                 } else if (paymentVia[index]
-                              //                         .payment_mode ==
-                              //                     "Paystack") {
-                              //                   setState(() {
-                              //                     payStatck(
-                              //                         "${paymentVia[index].payment_key}");
-                              //                     showPaymentDialog = true;
-                              //                   });
-                              //                 }
-                              //                 if (paymentVia[index]
-                              //                         .payment_mode ==
-                              //                     "Paypal") {}
-                              //               },
-                              //             );
-                              //           },
-                              //           // separatorBuilder: (context, index) {
-                              //           //   return Divider(
-                              //           //     color: Colors.transparent,
-                              //           //     thickness: 0.1,
-                              //           //   );
-                              //           // },
-                              //           itemCount: paymentVia.length)
-                              //       : Container(),
-                              // ),
+                              (totalAmount > 0.0 &&
+                                      paymentVia != null &&
+                                      paymentVia.length > 0)
+                                  ? Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 8.0, horizontal: 16.0),
+                                      color: kCardBackgroundColor,
+                                      child: Text(
+                                        'ONLINE PAYMENT',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .copyWith(
+                                                color: kDisabledColor,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.67),
+                                      ),
+                                    )
+                                  : Container(),
+                              Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: FutureBuilder(
+                                    future: buildAamarpayData(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      if (snapshot.hasData) {
+                                        return AamarpayData(
+                                            returnUrl: (url) {
+                                              print(url);
+                                            },
+                                            isLoading: (v) {
+                                              setState(() {
+                                                isLoading = v;
+                                              });
+                                            },
+                                            paymentStatus: (status) {
+                                              print(status);
+                                              if (status == 'success') {
+                                                setState(() {
+                                                  setProgressText =
+                                                      'Proceeding to placed order please wait!....';
+                                                  showDialogBox = true;
+                                                });
+                                                placedOrder(
+                                                    "success", "ONLINE");
+                                              }
+                                            },
+                                            cancelUrl:
+                                                "example.com/payment/cancel",
+                                            successUrl:
+                                                "example.com/payment/confirm",
+                                            failUrl: "example.com/payment/fail",
+                                            customerEmail: snapshot.data
+                                                .getString('user_email'),
+                                            customerMobile: snapshot.data
+                                                .getString('user_phone'),
+                                            customerName: snapshot.data
+                                                .getString('user_name'),
+                                            signature:
+                                                "b1094e13af7b1ad5bbb55592e53ec7c7",
+                                            storeID: "dokandar",
+                                            transactionAmount: totalAmount,
+                                            transactionID: cart_id.toString(),
+                                            description:
+                                                "ORDER ID: ${cart_id.toString()}",
+                                            url: "https://secure.aamarpay.com",
+                                            child: isLoading
+                                                ? Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  )
+                                                : Container(
+                                                    padding: EdgeInsets.all(20),
+                                                    height: 60,
+                                                    child: Row(
+                                                      children: [
+                                                        Image(
+                                                            image: AssetImage(
+                                                                'images/payment/credit_card.png')),
+                                                        SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        Text(
+                                                          "ONLINE PAYMENT",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ));
+                                      } else {
+                                        return Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                    },
+                                  )),
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 16.0),
@@ -1362,4 +1396,9 @@ class PaymentPharmaPageState extends State<PaymentPharmaPage> {
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {}
+
+  Future<SharedPreferences> buildAamarpayData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs;
+  }
 }

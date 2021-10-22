@@ -65,6 +65,7 @@ class _HomeState extends State<Home> {
   void _getLocation(context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LocationPermission permission = await Geolocator.checkPermission();
+    print('PERMISSION: $permission');
     if (permission == LocationPermission.whileInUse ||
         permission == LocationPermission.always) {
       bool isLocationServiceEnableds =

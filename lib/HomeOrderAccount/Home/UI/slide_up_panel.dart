@@ -17,6 +17,9 @@ class SlideUpPanel extends StatefulWidget {
 class _SlideUpPanelState extends State<SlideUpPanel> {
   @override
   Widget build(BuildContext context) {
+    String paymentMethod = widget.ongoingOrders.payment_method == "ONLINE"
+        ? "Online Payment"
+        : "Cash On Delivery";
     return DraggableScrollableSheet(
       minChildSize: 0.20,
       initialChildSize: 0.20,
@@ -245,7 +248,7 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                                 Text(
-                                  'Cash on Delivery',
+                                  paymentMethod,
                                   style: Theme.of(context).textTheme.headline4,
                                 ),
                                 Text(

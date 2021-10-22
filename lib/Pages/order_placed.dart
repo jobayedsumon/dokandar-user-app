@@ -37,6 +37,9 @@ class OrderPlaced extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String msg = payment_method == 'COD'
+        ? 'Order id - $order_id has been Placed \n Please keep $currency $rem_price !!'
+        : 'Order id - $order_id has been Placed \n Online payment of $currency $rem_price has been successful !!';
     return WillPopScope(
       onWillPop: () {
         return Navigator.pushAndRemoveUntil(context,
@@ -59,7 +62,7 @@ class OrderPlaced extends StatelessWidget {
               ),
             ),
             Text(
-              'Order id - $order_id has been Placed \n Please keep $currency $rem_price!!',
+              msg,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1

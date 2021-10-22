@@ -9,6 +9,7 @@ import 'package:user/HomeOrderAccount/Home/UI/home.dart';
 import 'package:user/HomeOrderAccount/Home/UI/order_placed_map.dart';
 import 'package:user/HomeOrderAccount/Order/UI/order_page.dart';
 import 'package:user/HomeOrderAccount/home_order_account.dart';
+import 'package:user/Pages/AamarPay.dart';
 import 'package:user/Pages/view_cart.dart';
 import 'package:user/pharmacy/pharmacart.dart';
 import 'package:user/restaturantui/resturant_cart.dart';
@@ -39,6 +40,7 @@ class PageRoutes {
   static const String reffernearn = 'reffernearn';
   static const String returanthome = 'returanthome';
   static const String pharmacart = 'pharmacart';
+  static const String aamarpay = 'aamarpay';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -58,6 +60,7 @@ class PageRoutes {
       settings: (context) => Settings(),
       restviewCart: (context) => RestuarantViewCart(),
       pharmacart: (context) => PharmaViewCart(),
+      aamarpay: (context) => AamarPay(),
     };
   }
 }
