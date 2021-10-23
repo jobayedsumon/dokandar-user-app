@@ -81,8 +81,8 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                     .toString()
                                                     .length >
                                                 5) {
-                                          _launchURL(
-                                              "tel://${widget.ongoingOrders.delivery_boy_phone}");
+                                          launch(
+                                              "tel:${widget.ongoingOrders.delivery_boy_phone}");
                                         } else {
                                           Toast.show(
                                               'Delivery boy not assigned yet',
