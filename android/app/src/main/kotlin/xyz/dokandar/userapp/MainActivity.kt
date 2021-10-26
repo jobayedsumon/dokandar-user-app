@@ -1,4 +1,4 @@
-package xyz.dokandar.user
+package xyz.dokandar.userapp
 
 import io.flutter.embedding.android.FlutterActivity
 
