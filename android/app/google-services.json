@@ -1,62 +1,33 @@
 {
   "project_info": {
-    "project_number": "610443387774",
-    "project_id": "dokandar-316216",
-    "storage_bucket": "dokandar-316216.appspot.com"
+    "project_number": "71124321902",
+    "project_id": "dokandarxyz-79a78",
+    "storage_bucket": "dokandarxyz-79a78.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:610443387774:android:8fe752f322bc6daa60892f",
+        "mobilesdk_app_id": "1:71124321902:android:5a9185ff5acb78fe8ac87f",
         "android_client_info": {
-          "package_name": "xyz.dokandar.user"
+          "package_name": "xyz.dokandar.userapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "610443387774-bfhtfmvtm9m1vdu1a31rjkvlvdemgs0e.apps.googleusercontent.com",
+          "client_id": "71124321902-8ccos25t6vdlnvgjei4gdgv3ul0bp6iu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDNtJMAKKfqKgW8cjshI9n6AWE9CKQA5KE"
+          "current_key": "AIzaSyD89USrdqNZAQfAA8alo94urVC-JHaJBPU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "610443387774-bfhtfmvtm9m1vdu1a31rjkvlvdemgs0e.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:610443387774:android:cd7c470c9a21f35660892f",
-        "android_client_info": {
-          "package_name": "xyz.dokandar.vendor"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "610443387774-bfhtfmvtm9m1vdu1a31rjkvlvdemgs0e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDNtJMAKKfqKgW8cjshI9n6AWE9CKQA5KE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "610443387774-bfhtfmvtm9m1vdu1a31rjkvlvdemgs0e.apps.googleusercontent.com",
+              "client_id": "71124321902-8ccos25t6vdlnvgjei4gdgv3ul0bp6iu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
