@@ -1,4 +1,4 @@
-package xyz.dokandar.user;
+package xyz.dokandar.userapp;
 
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin;

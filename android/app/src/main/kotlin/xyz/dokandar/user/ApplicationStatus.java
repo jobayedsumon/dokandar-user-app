@@ -1,4 +1,4 @@
-package xyz.dokandar.user;
+package xyz.dokandar.userapp;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -13,7 +13,7 @@ public class ApplicationStatus extends FlutterApplication implements PluginRegis
     public void onCreate() {
         super.onCreate();
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setApplicationId("xyz.dokandar.user") // Required for Analytics.
+                .setApplicationId("xyz.dokandar.userapp") // Required for Analytics.
                 .setProjectId("dokandar-316216") // Required for Firebase Installations.
                 .setApiKey("AIzaSyDNtJMAKKfqKgW8cjshI9n6AWE9CKQA5KE") // Required for Auth.
                 .build();
